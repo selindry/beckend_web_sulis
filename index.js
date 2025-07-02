@@ -15,18 +15,16 @@ let portfolios = [
 
 let messages = [];
 
-// Routes
+// === ROUTES ===
 
-// Info endpoint kontak
+// GET info untuk endpoint kontak
 app.get('/api/contact', (req, res) => {
   res.send('Gunakan metode POST untuk mengirim pesan ke /api/contact');
 });
 
-// Kirim pesan kontak
+// POST untuk menyimpan pesan kontak
 app.post('/api/contact', (req, res) => {
   const { name, email, message } = req.body;
-  console.log("📨 Pesan diterima:", req.body);
-
   if (!name || !email || !message) {
     return res.status(400).json({ error: 'Lengkapi semua field' });
   }
@@ -35,12 +33,12 @@ app.post('/api/contact', (req, res) => {
   res.status(201).json({ message: 'Pesan berhasil dikirim' });
 });
 
-// Ambil semua pesan
+// GET semua pesan dari user
 app.get('/api/messages', (req, res) => {
   res.json(messages);
 });
 
-// Ambil semua proyek portfolio
+// Ambil semua data portfolio
 app.get('/api/portfolios', (req, res) => {
   res.json(portfolios);
 });
@@ -57,7 +55,7 @@ app.post('/api/portfolios', (req, res) => {
   res.status(201).json(newProject);
 });
 
-// Update proyek
+// Update proyek berdasarkan ID
 app.put('/api/portfolios/:id', (req, res) => {
   const id = parseInt(req.params.id);
   const { title, description } = req.body;
@@ -68,7 +66,7 @@ app.put('/api/portfolios/:id', (req, res) => {
   res.json(portfolios[index]);
 });
 
-// Hapus proyek
+// Hapus proyek berdasarkan ID
 app.delete('/api/portfolios/:id', (req, res) => {
   const id = parseInt(req.params.id);
   portfolios = portfolios.filter(p => p.id !== id);
@@ -77,10 +75,6 @@ app.delete('/api/portfolios/:id', (req, res) => {
 
 // Jalankan server
 app.listen(PORT, '0.0.0.0', () => {
-  console.log(`✅ Server berjalan di http://0.0.0.0:${PORT}`);
+  console.log(`Server berjalan di http://0.0.0.0:${PORT}`);
 });
 
-// Tangkap error tak terduga
-process.on('uncaughtException', (err) => {
-  console.error('❌ Uncaught Exception:', err);
-});
