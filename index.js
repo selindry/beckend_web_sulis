@@ -4,7 +4,9 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: 'https://frontend-web-sulis.vercel.app'
+}));
 app.use(express.json());
 
 // Dummy data
