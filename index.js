@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 8080;
 
 // Middleware
 app.use(cors());
@@ -15,16 +15,18 @@ let portfolios = [
 
 let messages = [];
 
-// === ROUTES ===
+// Routes
 
-// GET info untuk endpoint kontak
+// Info endpoint kontak
 app.get('/api/contact', (req, res) => {
   res.send('Gunakan metode POST untuk mengirim pesan ke /api/contact');
 });
 
-// POST untuk menyimpan pesan kontak
+// Kirim pesan kontak
 app.post('/api/contact', (req, res) => {
   const { name, email, message } = req.body;
+  console.log("📨 Pesan diterima:", req.body);
+
   if (!name || !email || !message) {
     return res.status(400).json({ error: 'Lengkapi semua field' });
   }
@@ -33,12 +35,12 @@ app.post('/api/contact', (req, res) => {
   res.status(201).json({ message: 'Pesan berhasil dikirim' });
 });
 
-// GET semua pesan dari user
+// Ambil semua pesan
 app.get('/api/messages', (req, res) => {
   res.json(messages);
 });
 
-// Ambil semua data portfolio
+// Ambil semua proyek portfolio
 app.get('/api/portfolios', (req, res) => {
   res.json(portfolios);
 });
@@ -55,7 +57,7 @@ app.post('/api/portfolios', (req, res) => {
   res.status(201).json(newProject);
 });
 
-// Update proyek berdasarkan ID
+// Update proyek
 app.put('/api/portfolios/:id', (req, res) => {
   const id = parseInt(req.params.id);
   const { title, description } = req.body;
@@ -66,7 +68,7 @@ app.put('/api/portfolios/:id', (req, res) => {
   res.json(portfolios[index]);
 });
 
-// Hapus proyek berdasarkan ID
+// Hapus proyek
 app.delete('/api/portfolios/:id', (req, res) => {
   const id = parseInt(req.params.id);
   portfolios = portfolios.filter(p => p.id !== id);
@@ -76,4 +78,9 @@ app.delete('/api/portfolios/:id', (req, res) => {
 // Jalankan server
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`✅ Server berjalan di http://0.0.0.0:${PORT}`);
+});
+
+// Tangkap error tak terduga
+process.on('uncaughtException', (err) => {
+  console.error('❌ Uncaught Exception:', err);
 });
