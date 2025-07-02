@@ -1,15 +1,15 @@
 {
-  "name": "sulis",
+  "name": "portofolio1",
   "version": "1.0.0",
-  "description": "Backend sederhana untuk portfolio web Sulis",
+  "description": "portofolio1",
   "main": "index.js",
-  "type": "commonjs",
   "scripts": {
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
+  "type": "commonjs",
   "dependencies": {
     "body-parser": "^2.2.0",
     "cors": "^2.8.5",
