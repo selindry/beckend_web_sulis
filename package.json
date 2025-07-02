@@ -1,14 +1,15 @@
 {
   "name": "sulis",
   "version": "1.0.0",
-  "description": "",
-  "license": "ISC",
-  "author": "",
-  "type": "commonjs",
+  "description": "Backend sederhana untuk portfolio web Sulis",
   "main": "index.js",
+  "type": "commonjs",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "author": "",
+  "license": "ISC",
   "dependencies": {
     "body-parser": "^2.2.0",
     "cors": "^2.8.5",
